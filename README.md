@@ -1,14 +1,18 @@
+
 ## <Comparar la productiva del primer trimestre de años consecutivos de Ostión del Norte con fines de enseñanza aprendizaje como muestra de situaciones normales y anómalas que permitan visualizar la toma de decisiones para estudiantes del área tecnico profesional.   
 
 ## Autor: Oscar Leiva Pizarro
 
-## Descripción: La información generada en un cultivo de ostiones, en sus actividades productivas diarias y medioambientales, se registra en formularios. Esta información lleva a la opción de calcular crecimiento, mortalidad, densidad de siembra y cosecha en sus distintas etapas: semilla, juvenil y adulto, agregando las cosechas realizadas. Se compararán los tres primeros meses de dos años consecutivos. En la base de datos se manipularan los datos, que a través de las gráficas se explicarán situaciones normales y anómalas de producción. Se agregarán graficas de variables ambientales para ambos ciclos. Estas gráficas se utilizan de apoyo en la tomo de decisiones productivas.
+## Descripción del problema
+Existen datos productivos que pueden ser utilizados por los distinos interesados. Para los productores, diferenciar un año con otro le seria útil para analizar la forma en que llevo el cultivo, qué cambios realizo y qué tan utiles fueron para su negocio. La gran cantidad de datos que se acumulan sin sistematización hace imposible que esto se pueda llevar a cabo.
 
-## Descripción de Variables
+## Descripción de varibles
+Las variables serian: Productividad, cantidad de ostiones y etapa de cultivo.
+Se puede indicar que la productividad es lo produccido en un tiempo determinado, lo que lleva a penser en "hacer más en menos tiempo". ## La cantidad de ostiones es el número de individuos que se manejan en las actividades acuicolas diarias. La variable etapa de cultivo, se relaciona con los momentos por los que pasan los ostiones e indican ingreso de semillas y cosechas como los hitos más importantes; además, es la información que debe ser entregada mensualmente a SernaPesca.
 
-## Las varibles que se analizarán en este proyecto son: crecimiento, mortalidad y cantidad de ostiones por etapa de cultivo. El crecimiento de calculará de los resultados de los desdobles que se realizan en las actividades periodicas de producción. La mortalidad se calculará de la estadística que lleva la empresa. Las cantidades de ostiones por etapa de cultivo se analizará por la talla según la siembra en sistemas de cultivo nuevos o limpios reparados. 
-## Grafuicos
+# Resultados
+Los gráficos muestran diferencias entre los ciclos productivos analizados. Las causas de esto puede ser diversas, lo importante que en proceso de enseñanza aprendizaje se estudie como un proceso diverso que tiene muchos factores que afectan: captaciones naturales, cantidad de colaboradores en el trabajo. Mayor analisis significa agregar más graficos a este trabajo.
 
-
-
+# Conclusión
+Analisis como estos permiten identificar los recursos empleados para cada terea en la empresa. Si existen diferencias negativas, qué se hizo mal; si existen diferencias positivas, que dene repetirse.
 

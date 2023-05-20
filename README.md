@@ -4,4 +4,6 @@
 ## Descripción de varibles
 ## Las variables serian: Productividad, cantidad de ostiones y etapa de cultivo.
 ## Se puede indicar que la productividad es lo produccido en un tiempo determinado, lo que lleva a penser en "hacer más en menos tiempo". ## La cantidad de ostiones es el número de individuos que se manejan en las actividades acuicolas diarias. La variable etapa de cultivo, se relaciona con los momentos por los que pasan los ostiones e indican ingreso de semillas y cosechas como los hitos más importantes; además, es la información que debe ser entregada mensualmente a SernaPesca.
+# Resultados
 
+# Conclusión

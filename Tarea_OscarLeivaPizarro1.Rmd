@@ -1,0 +1,315 @@
+---
+title: "Tarea_OscarLeivaPizarro"
+author: "Oscar Leiva Pizarro"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+# Habilitar los siguiente:
+library(readxl) #para importar datos a R
+library(dplyr) #para manipular datos
+library(tidyr) #para manipular datos
+library(ggplot2) #para realizar graficos
+library(readr) #para importar datos
+library(gridExtra) #para presentar mas de un datos
+
+```
+
+Primer paso para el análisis de datos es la instalación de las librerias necesarias para sus aplicaciones.
+
+
+```{r}
+Tabla <- read_excel("Tabla_Diplomado_RStudio.xlsx", sheet= "RESUMEN", na="NA")
+View(Tabla)
+str(Tabla)
+summary(Tabla)
+
+```
+
+
+
+```{r}
+
+```
+
+
+
+# Habilita paquetes
+library(readxl) # Para importar datos a R
+
+library(dplyr) # Para manipular datos
+
+library(tidyr) # Para manipular datos
+
+library(ggplot2) # Para hacer gráficos
+library(gridExtra) # Para mostrar más de un gráfico simultáneamente
+
+# Importar base de datos, "NA" para que los reconozca como NA, si la 
+# celda esta vacia no es necesario escribir este argumento, "NA" si no esta asi cambia 
+# la naturaleza de las variables al importar la base de datos
+
+salmon <- read_excel("salmon.xlsx", na = "NA")
+
+# Ordenar la variable Sample de menor a mayor usando arrange. Se muestra 
+# mejor la base de datos, en relación a repetición de datos u otras 
+# cuestiones inconvenientes:
+
+salmon <- salmon%>% arrange(Sample)
+
+# Transformar variables tipo chr a factor, es lo 
+# conveniente siempre
+
+salmon$Sample <- as.factor(salmon$Sample)
+salmon$Ploidy <- as.factor(salmon$Ploidy)
+salmon$Family <- as.factor(salmon$Family)
+salmon$Tank <- as.factor(salmon$Tank)
+
+# Identificar datos atípicos, duplicados o faltantes (NA) con summary. Se debe
+# analizar cada variable, en la consola:
+
+summary(salmon)
+
+# Ver la dimensión de la nueva base de datos con datos faltantes
+dim(salmon)
+
+# Omitir/quitar datos faltantes na.omit()
+# Elimina la fila completa del individuo que tenga, en alguna celda, un valor NA
+
+salmon_new <- na.omit(salmon)
+
+# Ver la dimensión de la nueva base de datos sin datos faltantes 
+dim(salmon_new)
+
+# Reemplazar datos faltantes por la media, mediana con replace_na()
+  
+salmon <- salmon%>% mutate(Weight = replace_na(Weight,median(Weight, na.rm = TRUE)),
+                           Length = replace_na(Length,median(Length, na.rm = TRUE)))
+
+
+# Identificar información duplicada en todas las columnas usando duplicated()
+dups_all <- salmon %>% filter(duplicated(.))
+
+
+# Identificar observaciones que están duplicadas para el mismo individuo (Sample) usando duplicated()
+dups_id <- salmon %>% filter(duplicated(Sample))
+
+# Unificar observaciones duplicadas usando distinct()
+salmon_unified <- salmon %>% distinct(Sample, .keep_all = TRUE)
+
+# Muestra las diez primeras observaciones de la nueva base de datos con head()
+
+head(salmon_unified,10)
+
+# Identificar valores atípicos (outliers)
+datos_outliers_bajos <- salmon_unified %>%
+  filter(Weight < (quantile(Weight, 0.25) - 1.5*IQR(Weight)) | Length < (quantile(Length, 0.25) - 1.5*IQR(Length))) 
+
+datos_outliers_altos <- salmon_unified %>%
+  filter(Weight > (quantile(Weight, 0.75) + 1.5*IQR(Weight)) | Length > (quantile(Length, 0.75) + 1.5*IQR(Length)))
+
+# Unir las observaciones de datos_outliers_bajos y datos_outliers_altos con rbind
+datos_outliers <- rbind(datos_outliers_bajos,datos_outliers_altos)
+
+# Generar base de datos sin valores atípicos (outliers)
+datos_sin_outliers <- anti_join(salmon_unified, datos_outliers, by = "Sample")
+
+# Modificar dato atípico usando mutate()
+salmon_mod <- salmon_unified %>%
+  mutate(Weight = ifelse(Sample == "M12", 54, Weight))
+
+# facet_wrap()```**: Permite dividir una gráfica en paneles o subgráficos basados en una o varias variables categóricas.  
+
+ggplot(salmon_unified, aes(x = Family, y = Weight, fill = Ploidy)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = c("turquoise", "coral")) +
+  facet_wrap(~ Ploidy) +
+  labs(title = "Weight distribution by family and ploidy level",
+       x = "Family",
+       y = "Weight (g)") +
+  theme_bw() +
+  geom_text(data = filter(salmon_unified, Weight > quantile(Weight, 0.75) + 1.5*IQR(Weight)),
+            aes(label = Sample), hjust = -0.2, vjust = 0.5)
+
+
+# grid.arrange(p, q, r, ncol = 3) : se utiliza para combinar varios gráficos de ggplot en una sola figura.
+
+# Hacer tema con características a aplicar en los gráficos 
+theme_customizado <-  theme(axis.text.x = element_text(size = 12, face = "bold", hjust = 0.5, vjust = 0.5), 
+                            plot.margin = unit(c(1,0.5,1,1), "cm"))
+
+# Hacer gráficos con ggplot2 y mostrarlos en una sola figura con grid.arrange()
+p <- ggplot(salmon_unified, aes(x = Weight)) + 
+  geom_histogram(fill="coral", bins=30) +
+  theme_bw()+
+  theme_customizado
+
+q <- ggplot(data = salmon_unified, aes(x = reorder(Family, Weight, FUN = mean), y = Weight))+
+  geom_boxplot(fill="darkolivegreen1")+
+  labs(x="Families", y="Weight (g)")+ 
+  geom_hline(yintercept = mean(salmon_unified$Weight), linetype = "solid", color = "blue")+
+  theme_bw()+
+  theme_customizado
+
+
+r <- ggplot(data = salmon_mod, aes(x = reorder(Family, Weight, FUN = mean), y = Weight))+
+  geom_boxplot(fill="cyan3")+
+  labs(x="Families", y="Weight (g)")+ 
+  geom_hline(yintercept = mean(salmon_mod$Weight), linetype = "solid", color = "blue")+
+  theme_bw()+
+  theme_customizado
+
+
+grid.arrange(p, q, r, ncol = 3)
+
+
+
+
+
+
+# Habilita paquetes
+library(readxl) # Para importar datos a R
+
+library(dplyr) # Para manipular datos
+
+library(ggplot2) # Para hacer gráficos
+
+library(tidyr) # Para manipular datos
+
+# PAQUETE DPLYR: EL OPERADOR PIPE (TUBERÍA).
+
+# dplyr usa el operador pipe %>% como una tubería para enlazar un data.frame con una o más funciones.
+set.seed(123)
+x <- rnorm(5)
+y <- rnorm(5)
+dat <- data.frame(x,y)
+dat
+max(dat) 
+dat %>% max
+dat %>% arrange(y) # Ordena filas de un data.frame por el valor de alguna columna
+dat %>% arrange(desc(y))
+
+# Importar messy datos
+messy <- read_excel("Peces.xlsx") # Carga el set de datos
+summary(messy)
+
+# Importar messy datos con datos faltantes
+messy <- read_excel("Peces.xlsx", na="NA")
+summary(messy)
+head(messy)  # Muestra los primeros datos del data set
+
+# Filtrar variable peso con tubería
+messy %>% filter(Variable == "peso")
+
+# Colapsar columna Especie
+messy %>% filter(Variable == "peso") %>% gather("Especie","Peso",2:4)
+
+# Crear objeto Peso
+Datos <- messy %>% filter(Variable == "peso") %>% gather("Especie","Peso",2:4)
+
+# Agregar indice peces
+Datos %>% mutate(peces=1:9)
+Datos <- Datos %>% mutate(peces=1:9)
+
+# EJERCICIO 1 - ver script_ejercicios.R - grupal
+
+# Unir Objetos Datos y Sexo.
+sexo <- read_excel("Peces.xlsx", sheet = 2)
+head(sexo)
+tidy_data <- left_join(Datos, sexo, "peces")
+head(tidy_data)
+
+# Eliminar y ordena columnas.
+tidy_data <- tidy_data[,-1] 
+tidy_data <- tidy_data[, c(3, 1, 4, 2)]
+head(tidy_data)
+
+# EJERCICIO 2 - ver script_ejercicios.R - grupal
+
+# FUNCIÓN SELECT()
+# Permite extraer o seleccionar variables/columnas específicas de un data.frame.
+select(tidy_data, Especie, Sexo)
+
+# FUNCIÓN SELECT() CON PIPE
+tidy_data %>% select(Especie, Sexo)
+
+# FUNCIÓN FILTER() CON PIPE
+# **filter()**: Para filtrar desde una tabla de datos un subconjunto de filas.
+# Ej. solo un nivel de de un factor, observaciones que cumplen algún criterio (ej. > 20).
+tidy_data %>% filter(Sexo == "Macho")
+
+# MÚLTIPLES FUNCIONES Y TUBERÍAS
+tidy_data %>% select(Especie, Sexo, Peso) %>% 
+  filter(Sexo == "Macho")
+
+# FUNCIÓN SUMMARIZE()
+tidy_data %>% select(Especie, Sexo, Peso) %>% 
+          summarize(n = n(), 
+                    Promedio_Peso = mean(Peso), 
+                    Maximo_Peso = max(Peso))
+
+# FUNCIÓN SUMMARIZE() removiendo NA
+tidy_data %>% select(Especie, Sexo, Peso) %>% 
+  summarize(n = n(), 
+            Promedio_Peso = mean(Peso, na.rm=T), 
+            Maximo_Peso = max(Peso, na.rm=T))
+
+# FUNCIÓN SUMMARIZE() + GROUP_BY()
+# Permite agrupar filas con base a los niveles de alguna variable o factor.
+tidy_data %>% group_by(Especie) %>% 
+          summarize(n = n(), 
+            Promedio_Peso = mean(Peso, na.rm=T), 
+            Maximo_Peso = max(Peso, na.rm=T))
+
+# EJERCICIO 3 - ver script_ejercicios.R - grupal
+
+# FUNCIÓN MUTATE()
+# Permite calcular nuevas variables "derivadas", ej. proporciones, tasas, log.
+tidy_data <- read_excel("Peces.xlsx", sheet = 3, na="NA") 
+
+tidy_data %>% select(Especie, Peso, Parasitos) %>%
+  mutate(Densidad_parasitos = Parasitos/Peso)
+tidy_data
+
+# EJERCICIO 4 - ver script_ejercicios.R - individual
+
+# GRÁFICA DE DISPERSIÓN CON GGPLOT2
+
+tidy_data %>% ggplot(aes(x=Peso, y=Parasitos, color=Sexo))+
+  geom_point(size=2)+
+  labs(x= "Peso(g)", y= "Número de parásitos")+
+  theme_bw()
+
+# EJERCICIO 5 - ver script_ejercicios.R - individual
+
+
+
+
+
+
+
+
+
+
+
+
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

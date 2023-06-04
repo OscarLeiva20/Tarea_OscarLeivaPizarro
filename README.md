@@ -14,5 +14,5 @@ Se puede indicar que la productividad es lo produccido en un tiempo determinado,
 Los gráficos muestran diferencias entre los ciclos productivos analizados. Las causas de esto puede ser diversas, lo importante que en proceso de enseñanza aprendizaje se estudie como un proceso diverso que tiene muchos factores que afectan: captaciones naturales, cantidad de colaboradores en el trabajo. Mayor analisis significa agregar más graficos a este trabajo.
 
 # Conclusión
-Analisis como estos permiten identificar los recursos empleados para cada terea en la empresa. Si existen diferencias negativas, qué se hizo mal; si existen diferencias positivas, que dene repetirse.
+Analisis como estos permiten identificar los recursos empleados para cada terea en la empresa. Si existen diferencias negativas, qué se hizo mal; si existen diferencias positivas, que deben repetirse.
 

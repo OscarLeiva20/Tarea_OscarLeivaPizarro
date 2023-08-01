@@ -14,8 +14,11 @@ H0 = Entre las temporadas que se comparan, temporada 1 y temporada 2 (distintos 
 H1 =  Entre las temporadas que se comparan, temporada 1 y temporada 2 (distintos primer trimestre de dos años), existen diferencias significativas en sus producciones y mortalidades resultantes.
 
 ## Descripción de varibles
-Las variables serian: Productividad, cantidad de ostiones y etapa de cultivo.
-Se puede indicar que la productividad es lo produccido en un tiempo determinado, lo que lleva a penser en "hacer más en menos tiempo". ## La cantidad de ostiones es el número de individuos que se manejan en las actividades acuicolas diarias. La variable etapa de cultivo, se relaciona con los momentos por los que pasan los ostiones e indican ingreso de semillas y cosechas como los hitos más importantes; además, es la información que debe ser entregada mensualmente a SernaPesca.
+Las variables serian: Productividad (como capacidad de elaborar algo, producir algo), Cantidad de ostiones y Etapa de cultivo.
+Se puede indicar que la productividad es lo que se puede producir en un tiempo determinado, lo que lleva a penser en "hacer más en menos tiempo".
+La cantidad de ostiones es el número de individuos que se manejan en las actividades acuicolas diarias. 
+La variable etapa de cultivo, se relaciona con los momentos por los que pasan los ostiones e indican ingreso de semillas y cosechas como los hitos más importantes; además, es la información que debe ser entregada mensualmente a SernaPesca.
+La variable mortalidad, en la base de datos se muestra como la diferencia entre los sacado y lo colgado lo que entrega un número. También, se calcula como un porcentaje.
 
 # Resultados
 Los gráficos muestran diferencias entre los ciclos productivos analizados. Las causas de esto puede ser diversas, lo importante que en proceso de enseñanza aprendizaje se estudie como un proceso diverso que tiene muchos factores que afectan: captaciones naturales, cantidad de colaboradores en el trabajo. Mayor analisis significa agregar más graficos a este trabajo.

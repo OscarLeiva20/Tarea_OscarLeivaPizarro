@@ -1,5 +1,5 @@
 
-## <Comparar la productiva del primer trimestre de años consecutivos de Ostión del Norte con fines de enseñanza aprendizaje como muestra de situaciones normales y anómalas que permitan visualizar la toma de decisiones para estudiantes del área tecnico profesional.   
+## <Comparar la productiva, considerando en este analisis, el indicador mortalidad como principal para el periodo primer trimestre de años consecutivos de Ostión del Norte con fines de enseñanza aprendizaje como muestra de situaciones normales y anómalas que permitan visualizar la toma de decisiones para estudiantes del área tecnico profesional.   
 
 ## Autor: Oscar Leiva Pizarro
 
@@ -23,7 +23,10 @@ LOs conceptos de situaciones normales o anómalas, se deducen de los fesultados 
 
 # Resultados
 Los gráficos muestran diferencias entre los ciclos productivos analizados. Las causas de esto puede ser diversas, lo importante que en proceso de enseñanza aprendizaje se estudie como un proceso diverso que tiene muchos factores que afectan: captaciones naturales, cantidad de colaboradores en el trabajo. Mayor analisis significa agregar más graficos a este trabajo.
+Los gráficos muestran diferencias entre los años, esto se debe principalmente a la inestabilidad en las captaciones naturales, lo que muestra las producciones dispares. 
+La mortalidad solo se analizo como un total, faltando la comparación del indicador por temporada.
 
 # Conclusión
 Analisis como estos permiten identificar los recursos empleados para cada terea en la empresa. Si existen diferencias negativas, qué se hizo mal; si existen diferencias positivas, que deben repetirse.
-
+No se demostro la diferencia en el indicador mortalidad en el momento de entregar los resultados de este trabajo.
+La herramienta estadistica de rstudio permite, en su correcta aplicación, mostrar a travaes de ejemplos especificos como puede variar la productividad en un cultivo realizanod supuestos específicos.

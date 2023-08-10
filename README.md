@@ -24,7 +24,7 @@ Los conceptos de situaciones normales o anómalas, se deducen de los fesultados 
 # Resultados
 Los gráficos muestran diferencias entre los ciclos productivos analizados. Las causas de esto puede ser diversas, lo importante que en proceso de enseñanza aprendizaje se estudie como un proceso diverso que tiene muchos factores que afectan: captaciones naturales, cantidad de colaboradores en el trabajo. Mayor analisis significa agregar más graficos a este trabajo.
 Los gráficos muestran diferencias entre los años, esto se debe principalmente a la inestabilidad en las captaciones naturales, lo que muestra las producciones dispares. 
-La mortalidad solo se analizo como un total, faltando la comparación del indicador por temporada.
+La mortalidad sólo se analizo como un total, faltando la comparación del indicador por temporada.
 
 # Conclusión
 Analisis como estos permiten identificar los recursos empleados para cada terea en la empresa. Si existen diferencias negativas, qué se hizo mal; si existen diferencias positivas, que deben repetirse.
